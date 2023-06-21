@@ -46,7 +46,7 @@ class CalculationView extends StatelessWidget {
     stopwatch.start();
     fib(n);
     stopwatch.stop();
-    return stopwatch.elapsedMicroseconds;
+    return stopwatch.elapsedMilliseconds;
   }
 
   int fib(int n) {
@@ -72,7 +72,7 @@ class CalculationView extends StatelessWidget {
       }
     }
     stopwatch.stop();
-    return stopwatch.elapsedMicroseconds;
+    return stopwatch.elapsedMilliseconds;
   }
 
   int binarySearchTreeAlgorithm(int n) {
@@ -83,7 +83,7 @@ class CalculationView extends StatelessWidget {
       insert(element);
     }
     stopwatch.stop();
-    return stopwatch.elapsedMicroseconds;
+    return stopwatch.elapsedMilliseconds;
   }
   Node? root;
 
@@ -122,7 +122,7 @@ class CalculationView extends StatelessWidget {
     stopwatch.start();
     reverse(array);
     stopwatch.stop();
-    return stopwatch.elapsedMicroseconds;
+    return stopwatch.elapsedMilliseconds;
   }
 
   List<int> reverse(List<int> toReverse) {
@@ -162,7 +162,7 @@ class _CalculationWidgetElementState extends State<CalculationWidgetElement> {
         Container(
           width: 100,
           child: executionTime != null
-              ? Text('$executionTimeμs; n = $n') : null,
+              ? Text('${executionTime}ms; n = $n') : null,
         ),
       ],
     );
