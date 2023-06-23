@@ -24,6 +24,7 @@ class NInput extends StatelessWidget {
           ),
           ElevatedButton(
             onPressed: () {
+              FocusManager.instance.primaryFocus?.unfocus();
               final int n = int.parse(textController.text);
               if(n > 0) {
                 onSubmit(n);
