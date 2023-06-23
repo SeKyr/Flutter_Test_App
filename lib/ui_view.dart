@@ -32,15 +32,24 @@ class UIWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return Center(child: LayoutBuilder(builder: (context, constraints) {
       double squareSideLength = getOptimalSideLength(n, constraints.maxHeight, constraints.maxWidth);
-
+      int localN = n;
       int rows = (constraints.maxHeight / squareSideLength).floor();
       int columns = (constraints.maxWidth / squareSideLength).floor();
       return Row(
         mainAxisSize: MainAxisSize.min,
-        children: [
-          for (int i = 0; i < columns; i++)
-            createColumnWithAnimatedSquares(rows, squareSideLength)
-        ],
+        children: List.generate(columns, (index){
+          return Column(
+            mainAxisSize: MainAxisSize.min,
+            children: List.generate(rows, (index){
+              if (localN > 0) {
+                localN--;
+                return RotatingSquare(length: squareSideLength);
+              } else {
+                return Container();
+              }
+            }),
+          );
+        }),
       );
     }),);
   }
@@ -66,21 +75,19 @@ class UIWidget extends StatelessWidget {
     return min(smallerSideCellLength, biggerSideCellLength);
   }
 
-  Widget createColumnWithAnimatedSquares(int rowNumber, double length) {
+  Widget createColumnWithAnimatedSquares(int rowNumber, double length, int n) {
     return Column(
       mainAxisSize: MainAxisSize.min,
-      children: [for (int i = 0; i < rowNumber; i++) getColumnWidget(length)],
+      children: List.generate(rowNumber, (index){
+        print(n);
+        if (n > 0) {
+          n--;
+          return RotatingSquare(length: length);
+        } else {
+          return Container();
+        }
+      }),
     );
-  }
-
-  Widget getColumnWidget(double length) {
-    int localN = n;
-    if (localN > 0) {
-      localN--;
-      return RotatingSquare(length: length);
-    } else {
-      return Container();
-    }
   }
 }
 
