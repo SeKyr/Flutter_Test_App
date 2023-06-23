@@ -24,9 +24,9 @@ class _UIViewState extends State<UIView> {
 }
 
 class UIWidget extends StatelessWidget {
-  UIWidget({super.key, required this.n});
+  const UIWidget({super.key, required this.n});
 
-  int n;
+  final int n;
 
   @override
   Widget build(BuildContext context) {
@@ -74,8 +74,9 @@ class UIWidget extends StatelessWidget {
   }
 
   Widget getColumnWidget(double length) {
-    if (n > 0) {
-      n--;
+    int localN = n;
+    if (localN > 0) {
+      localN--;
       return RotatingSquare(length: length);
     } else {
       return Container();
