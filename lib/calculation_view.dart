@@ -77,6 +77,7 @@ class CalculationView extends StatelessWidget {
 
   int binarySearchTreeAlgorithm(int n) {
     List<int> data = List.generate(n, (i) => ((sin(i)-sin(i+1)) * 1000).toInt());
+    root = null;
     Stopwatch stopwatch = Stopwatch();
     stopwatch.start();
     for (var element in data) {
