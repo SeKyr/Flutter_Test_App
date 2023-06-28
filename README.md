@@ -2,15 +2,34 @@
 
 A new Flutter project to test the capabilities of the flutter framework.
 
-## Getting Started
+## WEB
 
-This project is a starting point for a Flutter application.
+### Compile and Minify for Production (Canvas)
 
-A few resources to get you started if this is your first Flutter project:
+```sh
+flutter build web --web-renderer canvaskit
+```
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
+### Compile and Minify for Production (HTML)
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+```sh
+flutter build web --web-renderer html
+```
+
+### Run production build locally
+
+```sh
+npm install express --no-save
+node webserver.js
+```
+
+URL: http://localhost:4200
+
+## Android
+
+### Build Android Release-APK
+
+```sh
+flutter build apk --split-per-abi
+```
+
