@@ -30,6 +30,6 @@ URL: http://localhost:4200
 ### Build Android Release-APK
 
 ```sh
-flutter build apk --split-per-abi
+flutter run --release
 ```
 
