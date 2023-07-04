@@ -19,19 +19,19 @@ class CalculationView extends StatelessWidget {
         child: Column(
           mainAxisSize: MainAxisSize.min,
           children: [
-            CalculationWidgetElement(
+            CalculationWidget(
               algorithmImplementation: fibonacciAlgorithm,
               algorithmName: 'Fib',
             ),
-            CalculationWidgetElement(
+            CalculationWidget(
               algorithmImplementation: matrixMultiplicationAlgorithm,
               algorithmName: 'Matrix',
             ),
-            CalculationWidgetElement(
+            CalculationWidget(
               algorithmImplementation: binarySearchTreeAlgorithm,
               algorithmName: 'Binary',
             ),
-            CalculationWidgetElement(
+            CalculationWidget(
               algorithmImplementation: reverseArrayAlgorithm,
               algorithmName: 'Array',
             )
@@ -137,8 +137,8 @@ class CalculationView extends StatelessWidget {
   }
 }
 
-class CalculationWidgetElement extends StatefulWidget {
-  const CalculationWidgetElement(
+class CalculationWidget extends StatefulWidget {
+  const CalculationWidget(
       {super.key, required this.algorithmName, required this.algorithmImplementation});
 
   final String algorithmName;
@@ -146,10 +146,10 @@ class CalculationWidgetElement extends StatefulWidget {
   final int Function(int) algorithmImplementation;
 
   @override
-  State<StatefulWidget> createState() => _CalculationWidgetElementState();
+  State<StatefulWidget> createState() => _CalculationWidgetState();
 
 }
-class _CalculationWidgetElementState extends State<CalculationWidgetElement> {
+class _CalculationWidgetState extends State<CalculationWidget> {
   int? executionTime;
   int? n;
 

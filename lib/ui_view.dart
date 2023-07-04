@@ -19,12 +19,12 @@ class _UIViewState extends State<UIView> {
 
   @override
   Widget build(BuildContext context) {
-    return _n == 0 ? NInput(onSubmit: _onNSubmit) : UIWidget(n: _n);
+    return _n == 0 ? NInput(onSubmit: _onNSubmit) : RotatingSquares(n: _n);
   }
 }
 
-class UIWidget extends StatelessWidget {
-  const UIWidget({super.key, required this.n});
+class RotatingSquares extends StatelessWidget {
+  const RotatingSquares({super.key, required this.n});
 
   final int n;
 
@@ -79,7 +79,6 @@ class UIWidget extends StatelessWidget {
     return Column(
       mainAxisSize: MainAxisSize.min,
       children: List.generate(rowNumber, (index){
-        print(n);
         if (n > 0) {
           n--;
           return RotatingSquare(length: length);
