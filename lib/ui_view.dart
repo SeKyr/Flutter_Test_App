@@ -19,39 +19,47 @@ class _UIViewState extends State<UIView> {
 
   @override
   Widget build(BuildContext context) {
-    return _n == 0 ? NInput(onSubmit: _onNSubmit) : RotatingSquares(n: _n);
+    return _n == 0
+        ? NInput(onSubmit: _onNSubmit)
+        : Center(child: LayoutBuilder(builder: (context, constraints) {
+            return RotatingSquares(
+                n: _n,
+                height: constraints.maxHeight,
+                width: constraints.maxWidth);
+          }));
   }
 }
 
 class RotatingSquares extends StatelessWidget {
-  const RotatingSquares({super.key, required this.n});
+  const RotatingSquares(
+      {super.key, required this.n, required this.height, required this.width});
 
   final int n;
+  final double height;
+  final double width;
 
   @override
   Widget build(BuildContext context) {
-    return Center(child: LayoutBuilder(builder: (context, constraints) {
-      double squareSideLength = getOptimalSideLength(n, constraints.maxHeight, constraints.maxWidth);
-      int localN = n;
-      int rows = (constraints.maxHeight / squareSideLength).floor();
-      int columns = (constraints.maxWidth / squareSideLength).floor();
-      return Row(
-        mainAxisSize: MainAxisSize.min,
-        children: List.generate(columns, (index){
-          return Column(
-            mainAxisSize: MainAxisSize.min,
-            children: List.generate(rows, (index){
-              if (localN > 0) {
-                localN--;
-                return RotatingSquare(length: squareSideLength);
-              } else {
-                return Container();
-              }
-            }),
-          );
-        }),
-      );
-    }),);
+    double squareSideLength = getOptimalSideLength(n, height, width);
+    int localN = n;
+    int rows = (height / squareSideLength).floor();
+    int columns = (width / squareSideLength).floor();
+    return Row(
+      mainAxisSize: MainAxisSize.min,
+      children: List.generate(columns, (index) {
+        return Column(
+          mainAxisSize: MainAxisSize.min,
+          children: List.generate(rows, (index) {
+            if (localN > 0) {
+              localN--;
+              return RotatingSquare(length: squareSideLength);
+            } else {
+              return Container();
+            }
+          }),
+        );
+      }),
+    );
   }
 
   double getOptimalSideLength(int n, double width, double height) {
@@ -59,7 +67,8 @@ class RotatingSquares extends StatelessWidget {
     double squareSideLength = sqrt(sizePerSquare);
     double smallerSideLength = min(height, width);
     double biggerSideLength = max(height, width);
-    if (squareSideLength <= smallerSideLength && squareSideLength <= biggerSideLength / n) {
+    if (squareSideLength <= smallerSideLength &&
+        squareSideLength <= biggerSideLength / n) {
       return squareSideLength;
     }
     int rows = 1;
@@ -67,8 +76,8 @@ class RotatingSquares extends StatelessWidget {
     double biggerSideCellLength = 0;
     double nextSmallerSideCellLength = 0;
     while (biggerSideCellLength <= nextSmallerSideCellLength) {
-      smallerSideCellLength = smallerSideLength/rows;
-      biggerSideCellLength = biggerSideLength/ (n / rows).ceil();
+      smallerSideCellLength = smallerSideLength / rows;
+      biggerSideCellLength = biggerSideLength / (n / rows).ceil();
       nextSmallerSideCellLength = smallerSideLength / (rows + 1);
       rows++;
     }
@@ -78,7 +87,7 @@ class RotatingSquares extends StatelessWidget {
   Widget createColumnWithAnimatedSquares(int rowNumber, double length, int n) {
     return Column(
       mainAxisSize: MainAxisSize.min,
-      children: List.generate(rowNumber, (index){
+      children: List.generate(rowNumber, (index) {
         if (n > 0) {
           n--;
           return RotatingSquare(length: length);
